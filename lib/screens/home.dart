@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traveladic_app/models/trips_model.dart';
+import 'package:traveladic_app/screens/individual_trip.dart';
 import 'package:traveladic_app/styles/app_styles.dart';
 
 import '../services/trips_service.dart';
@@ -49,17 +50,77 @@ class Home extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: FutureBuilder(
-                future: trips,
-                builder: (context, snapshot){
-                  if(snapshot.hasData) {
-                    var trips = snapshot.data!;
-                    return ListView.builder(
-                        itemCount: trips.length,
-                        itemBuilder: (context, index) {
-                          var trip = trips[index];
-                            return Card(
+          FutureBuilder(
+              future: trips,
+              builder: (context, snapshot){
+                if(snapshot.hasData) {
+                   var trips = snapshot.data!;
+                  // return Expanded(
+                  //   child: ListView.builder(
+                  //       itemCount: trips.length,
+                  //       itemBuilder: (context, index) {
+                  //         var trip = trips[index];
+                  //           return InkWell(
+                  //             onTap: (){
+                  //               Navigator.push(
+                  //                   context,
+                  //                   MaterialPageRoute(builder: (context) => IndividualTrip(trips: trip,))
+                  //               );
+                  //             },
+                  //             child: Card(
+                  //               shape: RoundedRectangleBorder(
+                  //                 side: const BorderSide(color: AppStyles.principal),
+                  //                 borderRadius: BorderRadius.circular(15),
+                  //               ),
+                  //               child: Padding(
+                  //                 padding: const EdgeInsets.all(10),
+                  //                 child: Row(
+                  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //                   children: [
+                  //                     Column(
+                  //                       crossAxisAlignment: CrossAxisAlignment.start,
+                  //                       children: [
+                  //                         Text(
+                  //                           trip.viatge,
+                  //                           style: const TextStyle(fontSize: 20),
+                  //                         ),
+                  //                         Text(trip.dates),
+                  //                       ],
+                  //                     ),
+                  //                     const SizedBox(
+                  //                       width: 20,
+                  //                     ),
+                  //                     InkWell(
+                  //                       onTap: (){
+                  //                         // codi per favorite
+                  //                       },
+                  //                       child: const Icon(
+                  //                         Icons.favorite_border_outlined,
+                  //                         color: AppStyles.principal,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //
+                  //
+                  //               ),
+                  //             ),
+                  //           );
+                  //         }
+                  //       ),
+                  // );
+                  return Expanded(
+                    child: ListView(
+                      children: [
+                        for(var trip in trips)
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => IndividualTrip(trips: trip,))
+                              );
+                            },
+                            child: Card(
                               shape: RoundedRectangleBorder(
                                 side: const BorderSide(color: AppStyles.principal),
                                 borderRadius: BorderRadius.circular(15),
@@ -84,6 +145,7 @@ class Home extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: (){
+                                        // codi per favorite
 
                                       },
                                       child: const Icon(
@@ -96,18 +158,19 @@ class Home extends StatelessWidget {
 
 
                               ),
-                            );
-                          }
-                        );
-                  } else if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Error')
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },),
-          )
+                            ),
+                          )
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Error')
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },)
           /* Card(
               shape: (RoundedRectangleBorder(
                 side: const BorderSide(color: AppStyles.principal),
