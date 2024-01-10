@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "307542474803",
+    "project_id": "traveladic-bb374",
+    "storage_bucket": "traveladic-bb374.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307542474803:android:f6d3a6e491306649c3e346",
+        "android_client_info": {
+          "package_name": "com.example.traveladic_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFzg08yiLN8sF3-DjT3zSEJOv8DwmCwqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
